@@ -9,127 +9,99 @@
 */
 
 //2. Para cada dia da semana, associe uma estratégia responsável por executar uma ação específica.
-<<<<<<< HEAD
-enum priority{
+enum priority {
     High = "ALTA",
-    Medium = "MEDIA",
+    Medium = "MÉDIA",
     Low = "BAIXA"
 }
-interface contexto{
+
+interface contexto {
     username: string,
     atividade: string,
 }
-interface strategy{
+interface strategy {
     getDiaNome(): string;
     get priority(): priority;
     objetivo(contexto: contexto): void;
 }
-
-
 class Domingo implements strategy {
-    getDiaNome(): string {
-        return "Domingo";
-    }
-    get priority(): priority {
-        return priority.Low;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Planeje a proxima semana")
+    getDiaNome() { return "Domingo"; }
+    get priority() { return priority.Low; }
+
+    objetivo(c: contexto): void {
+        console.log("Planeje a próxima semana.");
     }
 }
-
 class Segunda implements strategy {
-    getDiaNome(): string {
-        return "Segunda-feira";
-    }
-    get priority(): priority {
-        return priority.High;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Organize suas prioridades")
+    getDiaNome() { return "Segunda-feira"; }
+    get priority() { return priority.High; }
+
+    objetivo(c: contexto): void {
+        console.log("Organize suas prioridades.");
     }
 }
-
 class Terca implements strategy {
-    getDiaNome(): string {
-        return "Terça-feira";
-    }
-    get priority(): priority {
-        return priority.Medium;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Avance nas tarefas pendentes")
+    getDiaNome() { return "Terça-feira"; }
+    get priority() { return priority.Medium; }
+
+    objetivo(c: contexto): void {
+        console.log("Avance nas tarefas pendentes.");
     }
 }
-
 class Quarta implements strategy {
-    getDiaNome(): string {
-        return "Quarta-feira";
-    }
-    get priority(): priority {
-        return priority.Low;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Revise o andamento das atividads")
+    getDiaNome() { return "Quarta-feira"; }
+    get priority() { return priority.Medium; }
+
+    objetivo(c: contexto): void {
+        console.log("Revise o andamento das atividades.");
     }
 }
-
 class Quinta implements strategy {
-    getDiaNome(): string {
-        return "Quinta-feira";
-    }
-    get priority(): priority {
-        return priority.Medium;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Colabore com alguém da equipe")
+    getDiaNome() { return "Quinta-feira"; }
+    get priority() { return priority.Medium; }
+
+    objetivo(c: contexto): void {
+        console.log("Colabore com alguém da equipe.");
     }
 }
-
 class Sexta implements strategy {
-    getDiaNome(): string {
-        return "Sexta-feira";
-    }
-    get priority(): priority {
-        return priority.Low;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Registre o que foi concluido")
+    getDiaNome() { return "Sexta-feira"; }
+    get priority() { return priority.Low; }
+
+    objetivo(c: contexto): void {
+        console.log("Registre o que foi concluído.");
     }
 }
-
 class Sabado implements strategy {
-    getDiaNome(): string {
-        return "Sábado";
-    }
-    get priority(): priority {
-        return priority.Low;
-    }
-    objetivo(contexto: contexto): void {
-        console.log ("Realize estudo livre ou descanso")
-    }
-}
-class nullstrategy implements strategy{
-    getDiaNome(): string {
-        return "Dia invalido";
-    }
-    get priority(): priority {
-        return priority.Low;
-    }
-    objetivo(contexto: contexto): void {
-        console.log("Estrategia invalida");
-    }
-}
+    getDiaNome() { return "Sábado"; }
+    get priority() { return priority.Low; }
 
-class strategyFactory{
-    public static getStrategy(dia: string): strategy{
-        const tudominusculo = dia.toLowerCase();
+    objetivo(c: contexto): void {
+        console.log("Estudo livre ou descanso.");
+    }
+}
+class NullStrategy implements strategy {
+    getDiaNome() {
+        return "Dia inválido";
+    }
+    get priority() {
+        return priority.Low;
+    }
+    objetivo(_: contexto): void {
+        console.log("Estratégia inválida.");
+    }
+}
+class StrategyFactory {
+    public static getStrategy(dia: string): strategy {
+        const normalized = dia.toLowerCase();
 
         const map: Record<string, strategy> = {
             segunda: new Segunda(),
             "segunda-feira": new Segunda(),
+
             terca: new Terca(),
             "terca-feira": new Terca(),
+            "terça-feira": new Terca(),
             quarta: new Quarta(),
             "quarta-feira": new Quarta(),
             quinta: new Quinta(),
@@ -138,117 +110,29 @@ class strategyFactory{
             "sexta-feira": new Sexta(),
             sabado: new Sabado(),
             "sábado": new Sabado(),
-            domingo: new Domingo(),
-        }
-        return map[tudominusculo] || new nullstrategy();
+            domingo: new Domingo()
+        };
+
+        return map[normalized] ?? new NullStrategy();
     }
 }
-=======
-interface DiaSemana {
-    dia(): string;
-    objetivo(): void;
-}
-
-class Domingo implements DiaSemana {
-    dia (){
-        return "Domingo";
-    }
-    objetivo(): void {
-        console.log("Planeje a próxima semana.")
-    }
-}
-
-class Segunda implements DiaSemana {
-    dia (){
-        return "Segunda-feira";
-    }
-    objetivo(): void {
-        console.log("Organize suas prioridades.")
-    }
-}
-
-class Terca implements DiaSemana {
-    dia (){
-        return "Terça-feira";
-    }
-    objetivo(): void {
-        console.log("Avance nas tarefas pendentes.")
-    }
-}
-
-class Quarta implements DiaSemana {
-    dia (){
-        return "Quarta-feira";
-    }
-    objetivo(): void {
-        console.log("Revise o andamento das atividads.")
-    }
-}
-
-class Quinta implements DiaSemana {
-    dia (){
-        return "Quinta-feira";
-    }
-    objetivo(): void {
-        console.log("Colabore com alguém da equipe.")
-    }
-}
-
-class Sexta implements DiaSemana {
-    dia (){
-        return "Sexta-feira";
-    }
-    objetivo(): void {
-        console.log("Registre o que foi concluído.")
-    }
-}
-
-class Sabado implements DiaSemana {
-    dia (){
-        return "Sabado";
-    }
-
-    objetivo(): void {
-        console.log ("Realize estudo livre ou descanso.")
-    }
-}
-
->>>>>>> main
-//[X]3. A estratégia deve receber uma informação adicional informada pelo usuário, tal como nome, tarefa pendente ou meta semanal.
 class SemanaAtiva {
-    private nomeUsuario: string;
-    private tarefaPendente: string;
-    private metaSemanal: string;
-<<<<<<< HEAD
-    private diaSemana: strategy;
-=======
-    private diaSemana: DiaSemana;
->>>>>>> main
+    private nomeUsuario: string,
+    private tarefaPendente: string,
+    private metaSemanal: string,
+    private diaSemana: strategy
 
-    //5. Além da mensagem principal, cada estratégia deve informar uma recomendação de prioridade para aquele dia: ALTA, MÉDIA ou BAIXA.
-
-
-<<<<<<< HEAD
     constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: strategy) {
-=======
-    constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: DiaSemana) {
->>>>>>> main
         this.nomeUsuario = nomeUsuario;
         this.tarefaPendente = tarefaPendente;
         this.metaSemanal = metaSemanal;
         this.diaSemana = diaSemana;
     }
-
     public getNomeUsuario(): string {
         return this.nomeUsuario;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> main
     }
-}
 
+}
 function main() {
     //1. Obtenha a data atual por meio dos recursos disponíveis na linguagem escolhida e determine o dia da semana.
 
