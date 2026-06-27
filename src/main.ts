@@ -21,7 +21,7 @@ interface contexto{
 interface strategy{
     getDiaNome(): string;
     get priority(): priority;
-    execute(contexto: contexto): void;
+    objetivo(contexto: contexto): void;
 }
 
 
@@ -32,7 +32,7 @@ class Domingo implements strategy {
     get priority(): priority {
         return priority.Low;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Planeje a proxima semana")
     }
 }
@@ -44,7 +44,7 @@ class Segunda implements strategy {
     get priority(): priority {
         return priority.High;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Organize suas prioridades")
     }
 }
@@ -56,7 +56,7 @@ class Terca implements strategy {
     get priority(): priority {
         return priority.Medium;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Avance nas tarefas pendentes")
     }
 }
@@ -68,7 +68,7 @@ class Quarta implements strategy {
     get priority(): priority {
         return priority.Low;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Revise o andamento das atividads")
     }
 }
@@ -80,7 +80,7 @@ class Quinta implements strategy {
     get priority(): priority {
         return priority.Medium;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Colabore com alguém da equipe")
     }
 }
@@ -92,19 +92,19 @@ class Sexta implements strategy {
     get priority(): priority {
         return priority.Low;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Registre o que foi concluido")
     }
 }
 
 class Sabado implements strategy {
     getDiaNome(): string {
-        return "Sabado";
+        return "Sábado";
     }
     get priority(): priority {
         return priority.Low;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log ("Realize estudo livre ou descanso")
     }
 }
@@ -115,8 +115,31 @@ class nullstrategy implements strategy{
     get priority(): priority {
         return priority.Low;
     }
-    execute(contexto: contexto): void {
+    objetivo(contexto: contexto): void {
         console.log("Estrategia invalida");
+    }
+}
+
+class strategyFactory{
+    public static getStrategy(dia: string): strategy{
+        const tudominusculo = dia.toLowerCase();
+
+        const map: Record<string, strategy> = {
+            segunda: new Segunda(),
+            "segunda-feira": new Segunda(),
+            terca: new Terca(),
+            "terca-feira": new Terca(),
+            quarta: new Quarta(),
+            "quarta-feira": new Quarta(),
+            quinta: new Quinta(),
+            "quinta-feira": new Quinta(),
+            sexta: new Sexta(),
+            "sexta-feira": new Sexta(),
+            sabado: new Sabado(),
+            "sábado": new Sabado(),
+            domingo: new Domingo(),
+        }
+        return map[tudominusculo] || new nullstrategy();
     }
 }
 //[X]3. A estratégia deve receber uma informação adicional informada pelo usuário, tal como nome, tarefa pendente ou meta semanal.
@@ -138,8 +161,6 @@ class SemanaAtiva {
 
     public getNomeUsuario(): string {
         return this.nomeUsuario;
-
-
     }
 }
 
