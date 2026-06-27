@@ -27,7 +27,6 @@ interface strategy {
 class Domingo implements strategy {
     getDiaNome() { return "Domingo"; }
     get priority() { return priority.Low; }
-
     objetivo(c: contexto): void {
         console.log("Planeje a próxima semana.");
     }
@@ -35,7 +34,6 @@ class Domingo implements strategy {
 class Segunda implements strategy {
     getDiaNome() { return "Segunda-feira"; }
     get priority() { return priority.High; }
-
     objetivo(c: contexto): void {
         console.log("Organize suas prioridades.");
     }
@@ -43,41 +41,36 @@ class Segunda implements strategy {
 class Terca implements strategy {
     getDiaNome() { return "Terça-feira"; }
     get priority() { return priority.Medium; }
-
     objetivo(c: contexto): void {
-        console.log("Avance nas tarefas pendentes.");
+        console.log("Avance nas tarefas pendentes");
     }
 }
 class Quarta implements strategy {
     getDiaNome() { return "Quarta-feira"; }
     get priority() { return priority.Medium; }
-
     objetivo(c: contexto): void {
-        console.log("Revise o andamento das atividades.");
+        console.log("Revise o andamento das atividades");
     }
 }
 class Quinta implements strategy {
     getDiaNome() { return "Quinta-feira"; }
     get priority() { return priority.Medium; }
-
     objetivo(c: contexto): void {
-        console.log("Colabore com alguém da equipe.");
+        console.log("Colabore com alguem da equipe");
     }
 }
 class Sexta implements strategy {
     getDiaNome() { return "Sexta-feira"; }
     get priority() { return priority.Low; }
-
     objetivo(c: contexto): void {
-        console.log("Registre o que foi concluído.");
+        console.log("Registre o que foi concluido");
     }
 }
 class Sabado implements strategy {
     getDiaNome() { return "Sábado"; }
     get priority() { return priority.Low; }
-
     objetivo(c: contexto): void {
-        console.log("Estudo livre ou descanso.");
+        console.log("Estudo livre ou descanso");
     }
 }
 class NullStrategy implements strategy {
@@ -88,7 +81,7 @@ class NullStrategy implements strategy {
         return priority.Low;
     }
     objetivo(_: contexto): void {
-        console.log("Estratégia inválida.");
+        console.log("Estrategia invalida");
     }
 }
 class StrategyFactory {
@@ -98,7 +91,6 @@ class StrategyFactory {
         const map: Record<string, strategy> = {
             segunda: new Segunda(),
             "segunda-feira": new Segunda(),
-
             terca: new Terca(),
             "terca-feira": new Terca(),
             "terça-feira": new Terca(),
@@ -117,10 +109,10 @@ class StrategyFactory {
     }
 }
 class SemanaAtiva {
-    private nomeUsuario: string,
-    private tarefaPendente: string,
-    private metaSemanal: string,
-    private diaSemana: strategy
+    private nomeUsuario: string;
+    private tarefaPendente: string;
+    private metaSemanal: string;
+    private diaSemana: strategy;
 
     constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: strategy) {
         this.nomeUsuario = nomeUsuario;
