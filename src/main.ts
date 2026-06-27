@@ -9,6 +9,141 @@
 */
 
 //2. Para cada dia da semana, associe uma estratégia responsável por executar uma ação específica.
+<<<<<<< HEAD
+enum priority{
+    High = "ALTA",
+    Medium = "MEDIA",
+    Low = "BAIXA"
+}
+interface contexto{
+    username: string,
+    atividade: string,
+}
+interface strategy{
+    getDiaNome(): string;
+    get priority(): priority;
+    objetivo(contexto: contexto): void;
+}
+
+
+class Domingo implements strategy {
+    getDiaNome(): string {
+        return "Domingo";
+    }
+    get priority(): priority {
+        return priority.Low;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Planeje a proxima semana")
+    }
+}
+
+class Segunda implements strategy {
+    getDiaNome(): string {
+        return "Segunda-feira";
+    }
+    get priority(): priority {
+        return priority.High;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Organize suas prioridades")
+    }
+}
+
+class Terca implements strategy {
+    getDiaNome(): string {
+        return "Terça-feira";
+    }
+    get priority(): priority {
+        return priority.Medium;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Avance nas tarefas pendentes")
+    }
+}
+
+class Quarta implements strategy {
+    getDiaNome(): string {
+        return "Quarta-feira";
+    }
+    get priority(): priority {
+        return priority.Low;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Revise o andamento das atividads")
+    }
+}
+
+class Quinta implements strategy {
+    getDiaNome(): string {
+        return "Quinta-feira";
+    }
+    get priority(): priority {
+        return priority.Medium;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Colabore com alguém da equipe")
+    }
+}
+
+class Sexta implements strategy {
+    getDiaNome(): string {
+        return "Sexta-feira";
+    }
+    get priority(): priority {
+        return priority.Low;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Registre o que foi concluido")
+    }
+}
+
+class Sabado implements strategy {
+    getDiaNome(): string {
+        return "Sábado";
+    }
+    get priority(): priority {
+        return priority.Low;
+    }
+    objetivo(contexto: contexto): void {
+        console.log ("Realize estudo livre ou descanso")
+    }
+}
+class nullstrategy implements strategy{
+    getDiaNome(): string {
+        return "Dia invalido";
+    }
+    get priority(): priority {
+        return priority.Low;
+    }
+    objetivo(contexto: contexto): void {
+        console.log("Estrategia invalida");
+    }
+}
+
+class strategyFactory{
+    public static getStrategy(dia: string): strategy{
+        const tudominusculo = dia.toLowerCase();
+// Record representa um objeto cujas chaves são do tipo string e os valores são do tipo strategy, evitando o uso de multiplos ifs ou switches
+        const map: Record<string, strategy> = {
+            segunda: new Segunda(),
+            "segunda-feira": new Segunda(),
+            terca: new Terca(),
+            "terca-feira": new Terca(),
+            quarta: new Quarta(),
+            "quarta-feira": new Quarta(),
+            quinta: new Quinta(),
+            "quinta-feira": new Quinta(),
+            sexta: new Sexta(),
+            "sexta-feira": new Sexta(),
+            sabado: new Sabado(),
+            "sábado": new Sabado(), //erro se não colocar o acento, "An object literal cannot have multiple properties with the same name.""
+            domingo: new Domingo(),
+        }
+        return map[tudominusculo] || new nullstrategy();
+    }
+}
+=======
 interface DiaSemana {
     dia(): string;
     objetivo(): void;
@@ -78,17 +213,26 @@ class Sabado implements DiaSemana {
     }
 }
 
+>>>>>>> main
 //[X]3. A estratégia deve receber uma informação adicional informada pelo usuário, tal como nome, tarefa pendente ou meta semanal.
 class SemanaAtiva {
     private nomeUsuario: string;
     private tarefaPendente: string;
     private metaSemanal: string;
+<<<<<<< HEAD
+    private diaSemana: strategy;
+=======
     private diaSemana: DiaSemana;
+>>>>>>> main
 
     //5. Além da mensagem principal, cada estratégia deve informar uma recomendação de prioridade para aquele dia: ALTA, MÉDIA ou BAIXA.
 
 
+<<<<<<< HEAD
+    constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: strategy) {
+=======
     constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: DiaSemana) {
+>>>>>>> main
         this.nomeUsuario = nomeUsuario;
         this.tarefaPendente = tarefaPendente;
         this.metaSemanal = metaSemanal;
@@ -97,8 +241,11 @@ class SemanaAtiva {
 
     public getNomeUsuario(): string {
         return this.nomeUsuario;
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> main
     }
 }
 
