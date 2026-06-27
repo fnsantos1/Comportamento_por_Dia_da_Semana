@@ -123,7 +123,7 @@ class nullstrategy implements strategy{
 class strategyFactory{
     public static getStrategy(dia: string): strategy{
         const tudominusculo = dia.toLowerCase();
-
+// Record representa um objeto cujas chaves são do tipo string e os valores são do tipo strategy, evitando o uso de multiplos ifs ou switches
         const map: Record<string, strategy> = {
             segunda: new Segunda(),
             "segunda-feira": new Segunda(),
@@ -136,7 +136,7 @@ class strategyFactory{
             sexta: new Sexta(),
             "sexta-feira": new Sexta(),
             sabado: new Sabado(),
-            "sábado": new Sabado(),
+            "sábado": new Sabado(), //erro se não colocar o acento, "An object literal cannot have multiple properties with the same name.""
             domingo: new Domingo(),
         }
         return map[tudominusculo] || new nullstrategy();
