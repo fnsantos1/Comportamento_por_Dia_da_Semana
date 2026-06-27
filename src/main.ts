@@ -23,86 +23,113 @@ interface strategy{
     get priority(): priority;
     execute(contexto: contexto): void;
 }
-interface DiaSemana {
-    dia(): string;
-    objetivo(): void;
-}
 
-class Domingo implements DiaSemana {
-    dia (){
+
+class Domingo implements strategy {
+    getDiaNome(): string {
         return "Domingo";
     }
-    objetivo(): void {
-        console.log("Planeje a próxima semana.")
+    get priority(): priority {
+        return priority.Low;
+    }
+    execute(contexto: contexto): void {
+        console.log("Planeje a proxima semana")
     }
 }
 
-class Segunda implements DiaSemana {
-    dia (){
+class Segunda implements strategy {
+    getDiaNome(): string {
         return "Segunda-feira";
     }
-    objetivo(): void {
-        console.log("Organize suas prioridades.")
+    get priority(): priority {
+        return priority.High;
+    }
+    execute(contexto: contexto): void {
+        console.log("Organize suas prioridades")
     }
 }
 
-class Terca implements DiaSemana {
-    dia (){
+class Terca implements strategy {
+    getDiaNome(): string {
         return "Terça-feira";
     }
-    objetivo(): void {
-        console.log("Avance nas tarefas pendentes.")
+    get priority(): priority {
+        return priority.Medium;
+    }
+    execute(contexto: contexto): void {
+        console.log("Avance nas tarefas pendentes")
     }
 }
 
-class Quarta implements DiaSemana {
-    dia (){
+class Quarta implements strategy {
+    getDiaNome(): string {
         return "Quarta-feira";
     }
-    objetivo(): void {
-        console.log("Revise o andamento das atividads.")
+    get priority(): priority {
+        return priority.Low;
+    }
+    execute(contexto: contexto): void {
+        console.log("Revise o andamento das atividads")
     }
 }
 
-class Quinta implements DiaSemana {
-    dia (){
+class Quinta implements strategy {
+    getDiaNome(): string {
         return "Quinta-feira";
     }
-    objetivo(): void {
-        console.log("Colabore com alguém da equipe.")
+    get priority(): priority {
+        return priority.Medium;
+    }
+    execute(contexto: contexto): void {
+        console.log("Colabore com alguém da equipe")
     }
 }
 
-class Sexta implements DiaSemana {
-    dia (){
+class Sexta implements strategy {
+    getDiaNome(): string {
         return "Sexta-feira";
     }
-    objetivo(): void {
-        console.log("Registre o que foi concluído.")
+    get priority(): priority {
+        return priority.Low;
+    }
+    execute(contexto: contexto): void {
+        console.log("Registre o que foi concluido")
     }
 }
 
-class Sabado implements DiaSemana {
-    dia (){
+class Sabado implements strategy {
+    getDiaNome(): string {
         return "Sabado";
     }
-
-    objetivo(): void {
-        console.log ("Realize estudo livre ou descanso.")
+    get priority(): priority {
+        return priority.Low;
+    }
+    execute(contexto: contexto): void {
+        console.log ("Realize estudo livre ou descanso")
     }
 }
-
+class nullstrategy implements strategy{
+    getDiaNome(): string {
+        return "Dia invalido";
+    }
+    get priority(): priority {
+        return priority.Low;
+    }
+    execute(contexto: contexto): void {
+        console.log("Estrategia invalida");
+    }
+}
 //[X]3. A estratégia deve receber uma informação adicional informada pelo usuário, tal como nome, tarefa pendente ou meta semanal.
 class SemanaAtiva {
     private nomeUsuario: string;
     private tarefaPendente: string;
     private metaSemanal: string;
-    private diaSemana: DiaSemana;
+    private diaSemana: strategy;
 
     //5. Além da mensagem principal, cada estratégia deve informar uma recomendação de prioridade para aquele dia: ALTA, MÉDIA ou BAIXA.
 
 
-    constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: DiaSemana) {
+    constructor(nomeUsuario: string, tarefaPendente: string, metaSemanal: string, diaSemana: strategy) {
         this.nomeUsuario = nomeUsuario;
         this.tarefaPendente = tarefaPendente;
         this.metaSemanal = metaSemanal;
