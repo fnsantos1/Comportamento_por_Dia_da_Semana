@@ -163,4 +163,9 @@ minhaSemana.executar();
 // Exemplo de consulta de dia manual:
 getRandomStrategy();
 
+//Exemplo de consulta nula:
+const nullStrategy = StrategyFactory.getStrategy("banana");
+console.log("\nconsultando o dia 'banana'");
+minhaSemana.setStrategy(nullStrategy);
+minhaSemana.executar();
 
